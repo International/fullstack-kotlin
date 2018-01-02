@@ -19,14 +19,16 @@ buildscript {
 }
 
 subprojects {
+    val kotlinVersion = properties["kotlinVersion"] as String
+
     repositories {
         mavenCentral()
         maven { setUrl("https://repo.spring.io/milestone") }
         maven { setUrl("https://repo.spring.io/snapshot") }
     }
-
+ 
     plugins {
-        kotlin("jvm") version "1.1.51"
+        kotlin("jvm") version kotlinVersion
     }
 
     apply {
