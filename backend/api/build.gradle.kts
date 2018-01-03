@@ -9,8 +9,10 @@ apply {
 dependencies {
     val springBootVersion: String = parent!!.properties["springBootVersion"] as String
     val kotlinxHtmlVersion:String = properties["kotlinxHtmlVersion"] as String
-    compile(project(":backend:component"))
+    val hibernateValidatorVersion = properties["hibernateValidatorVersion"] as String
+    compile(project(":backend:project"))
     compile("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
     compile("org.springframework.boot:spring-boot-devtools:$springBootVersion")
     compile("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+    compile("org.hibernate:hibernate-validator:$hibernateValidatorVersion")
 }

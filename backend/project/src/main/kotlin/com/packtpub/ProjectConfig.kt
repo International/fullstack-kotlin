@@ -6,8 +6,8 @@ import org.springframework.context.support.GenericApplicationContext
 import org.springframework.context.support.beans
 
 @Configuration
-class HelloWorldConfig(ctx: GenericApplicationContext){
+class ProjectConfig(ctx: GenericApplicationContext){
 
     @Bean
-    fun helloSayer():HelloSayer = HelloWorld()
+    fun helloSayer():ProjectService = ProjectServiceImpl()
 }

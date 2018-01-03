@@ -1,8 +1,10 @@
 package com.packtpub.route
 
 import com.packtpub.HelloSayer
+import com.packtpub.ProjectService
 import com.packtpub.util.htmlView
 import com.packtpub.util.json
+import com.packtpub.views.index
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import org.springframework.context.annotation.Bean
@@ -13,7 +15,7 @@ import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Mono
 
-class ViewRoutes(private val helloSayer: HelloSayer) {
+class ViewRoutes(private val projectService: ProjectService) {
     private val links = mapOf(
             "Kotlin" to "https://github.com/JetBrains/kotlin",
             "Spring" to "https://github.com/spring-projects/spring-framework",
@@ -28,38 +30,7 @@ class ViewRoutes(private val helloSayer: HelloSayer) {
                     GET("/hello") { req ->
                         val name = req.queryParam("name").orElse("User")
                         ServerResponse.ok()
-                                .htmlView(
-                                        Mono.just(
-                                                createHTML(true).html {
-                                                    head {
-                                                        title = "Full Stack Kotlin"
-                                                        styleLink("/static/css/hello.css")
-                                                    }
-                                                    body {
-                                                        h4 {
-                                                            +helloSayer.sayHello(name)
-                                                        }
-                                                        p {
-                                                            +"Welcome to Full Stack Kotlin"
-                                                        }
-                                                        p {
-                                                            +"Our Resources:"
-                                                            ul {
-                                                                links.map { (name, url) ->
-                                                                    li {
-                                                                        a(url) {
-                                                                            target = ATarget.blank
-                                                                            +name
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        script(src = "/static/js/hello.js")
-                                                    }
-                                                }
-                                        )
-                                )
+                            .htmlView(Mono.just(index(name)))
                     }
                 }
                 resources("/**", ClassPathResource("/static"))
