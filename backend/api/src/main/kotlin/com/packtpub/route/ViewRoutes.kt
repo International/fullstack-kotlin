@@ -1,5 +1,8 @@
-package com.packtpub
+package com.packtpub.route
 
+import com.packtpub.HelloSayer
+import com.packtpub.util.htmlView
+import com.packtpub.util.json
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import org.springframework.context.annotation.Bean
@@ -25,8 +28,7 @@ class ViewRoutes(private val helloSayer: HelloSayer) {
                     GET("/hello") { req ->
                         val name = req.queryParam("name").orElse("User")
                         ServerResponse.ok()
-                                .contentType(MediaType.TEXT_HTML)
-                                .body(
+                                .htmlView(
                                         Mono.just(
                                                 createHTML(true).html {
                                                     head {
@@ -53,6 +55,7 @@ class ViewRoutes(private val helloSayer: HelloSayer) {
                                                                 }
                                                             }
                                                         }
+                                                        script(src = "/static/js/hello.js")
                                                     }
                                                 }
                                         )
