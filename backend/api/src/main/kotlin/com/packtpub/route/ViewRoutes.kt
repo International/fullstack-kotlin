@@ -2,6 +2,7 @@ package com.packtpub.route
 
 import com.packtpub.HelloSayer
 import com.packtpub.ProjectService
+import com.packtpub.handler.ViewHandler
 import com.packtpub.util.htmlView
 import com.packtpub.util.json
 import com.packtpub.views.index
@@ -15,7 +16,8 @@ import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Mono
 
-class ViewRoutes(private val projectService: ProjectService) {
+class ViewRoutes(private val projectService: ProjectService,
+                 private val viewHandler: ViewHandler) {
     private val links = mapOf(
             "Kotlin" to "https://github.com/JetBrains/kotlin",
             "Spring" to "https://github.com/spring-projects/spring-framework",
@@ -27,10 +29,8 @@ class ViewRoutes(private val projectService: ProjectService) {
     fun viewRouter() =
             router {
                 accept(MediaType.TEXT_HTML).nest {
-                    GET("/hello") { req ->
-                        val name = req.queryParam("name").orElse("User")
-                        ServerResponse.ok()
-                            .htmlView(Mono.just(index(name)))
+                    ("/projects" and accept(MediaType.TEXT_HTML)).nest {
+                        GET("/view", viewHandler::handle)
                     }
                 }
                 resources("/**", ClassPathResource("/static"))
