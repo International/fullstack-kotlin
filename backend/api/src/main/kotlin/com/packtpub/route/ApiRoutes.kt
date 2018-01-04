@@ -13,6 +13,10 @@ class ApiRoutes(private val apiHandler: ApiHandler) : WithLogging() {
             (accept(MediaType.APPLICATION_JSON_UTF8) and "/api").nest {
                 "/projects".nest {
                     POST("/", apiHandler::handle)
+                    GET("/", apiHandler::getProjects)
+                    GET("/owners", apiHandler::getOwners)
+                    GET("/{id}", apiHandler::getProject)
+                    GET("/byOwner/{name}", apiHandler::getByOwner)
                 }
             }
         }.filter{ req, next ->
