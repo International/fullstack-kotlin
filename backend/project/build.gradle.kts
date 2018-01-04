@@ -1,5 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.plugin.spring") version embeddedKotlinVersion
+    id("org.jetbrains.kotlin.plugin.jpa") version embeddedKotlinVersion
 }
 
 dependencies {
