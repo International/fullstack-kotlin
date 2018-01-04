@@ -11,6 +11,8 @@ buildscript {
 
     repositories {
         maven { setUrl("https://repo.spring.io/milestone") }
+        maven { setUrl("https://repo.spring.io/snapshot") }
+
     }
 
     dependencies {

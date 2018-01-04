@@ -15,8 +15,8 @@ class ApiRoutes(private val apiHandler: ApiHandler) : WithLogging() {
                     POST("/", apiHandler::handle)
                     GET("/", apiHandler::getProjects)
                     GET("/owners", apiHandler::getOwners)
-                    GET("/{id}", apiHandler::getProject)
                     GET("/byOwner/{name}", apiHandler::getByOwner)
+                    GET("/{id}", apiHandler::getProject)
                 }
             }
         }.filter{ req, next ->
