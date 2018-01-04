@@ -15,9 +15,12 @@ class ApiRoutes(private val projectService: ProjectService) {
     fun apiRouter() =
         router {
             (accept(MediaType.APPLICATION_JSON_UTF8) and "/api").nest {
-                GET("/hello") { req ->
-                    ServerResponse.ok()
-                        .json(Mono.just("Implement project saving here"))
+                "/projects".nest {
+                    POST("/") { req ->
+                        ServerResponse.ok()
+                            .json(Mono.just("Implement project saving here"))
+                    }
+
                 }
             }
         }
