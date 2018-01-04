@@ -17,7 +17,7 @@ fun main(args: Array<String>){
     application.addInitializers(ApplicationContextInitializer<GenericApplicationContext> { ctx ->
         beans{
             bean { ViewRoutes(it.ref()) }
-            bean { ApiRoutes(it.ref()) }
+            bean { ApiRoutes(it.ref(), it.ref()) }
         }(ctx)
     })
     application.run(*args)
