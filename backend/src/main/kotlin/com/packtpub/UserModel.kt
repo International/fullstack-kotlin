@@ -1,5 +1,8 @@
 package com.packtpub
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 
 @Entity
@@ -16,3 +19,13 @@ data class PacktUser(
     val roles:List<String> = listOf()
 
 )
+
+fun PacktUser.toUserDetails():UserDetails =
+    User.withUsername(username)
+        .password(password)
+        .accountExpired(!active)
+        .accountLocked(!active)
+        .credentialsExpired(!active)
+        .disabled(!active)
+        .authorities(roles.map(::SimpleGrantedAuthority).toList())
+        .build()
