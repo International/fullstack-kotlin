@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Mono
+import java.net.URI
 
 class ViewRoutes(private val projectService: ProjectService,
                  private val viewHandler: ViewHandler) {
@@ -28,6 +29,9 @@ class ViewRoutes(private val projectService: ProjectService,
     @Bean
     fun viewRouter() =
             router {
+                "/" {
+                    ServerResponse.temporaryRedirect(URI("/projects/view")).build()
+                }
                 accept(MediaType.TEXT_HTML).nest {
                     ("/projects" and accept(MediaType.TEXT_HTML)).nest {
                         GET("/view", viewHandler::handle)
