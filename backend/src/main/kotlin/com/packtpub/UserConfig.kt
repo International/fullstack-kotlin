@@ -30,15 +30,21 @@ fun BeanDefinitionDsl.securityBeans(paths: HttpSecurity.AuthorizeExchangeBuilder
     }
 
     bean<SecurityWebFilterChain>(){
+        println("running SecurityWebFilterChain bean")
         HttpSecurity.http().authorizeExchange()
             .paths(ref())
-//            .pathMatchers(HttpMethod.GET, "/api/projects/**").permitAll()
-//            .pathMatchers(HttpMethod.GET, "/projects/**").hasRole("ADMIN")
-//            .pathMatchers(HttpMethod.POST, "/api/projects/**").hasRole("ADMIN")
+//            .pathMatchers("/resources/**").permitAll()
+//            .pathMatchers(HttpMethod.GET, "/login").permitAll()
+//            .pathMatchers(HttpMethod.POST, "/login").permitAll()
+//            .pathMatchers(HttpMethod.POST, "/api/projects/**").access(securityService::isAdmin)
+//            .anyExchange().permitAll()
             .anyExchange().authenticated()
+
             .and()
             .authenticationManager(UserDetailsRepositoryAuthenticationManager(ref()))
             .formLogin()
+
             .and()
+
             .build()
     }}

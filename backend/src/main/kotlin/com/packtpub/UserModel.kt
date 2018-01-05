@@ -9,7 +9,7 @@ import javax.persistence.*
 @Table(name = "packtuser", uniqueConstraints = arrayOf(UniqueConstraint(columnNames = arrayOf("username"))))
 data class PacktUser(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id:Long? = null,
     val username:String,
     val password:String,

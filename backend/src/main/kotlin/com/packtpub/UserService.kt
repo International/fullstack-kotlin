@@ -8,6 +8,9 @@ interface UserService {
 internal class UserServiceImpl(private val userRepository: UserRepository) : UserService {
     override fun getUser(id: Long): PacktUser? = userRepository.findById(id).orElse(null)
 
-    override fun getUserByUsername(name: String): PacktUser? = userRepository.findOneByUsername(name).orElse(null)
+    override fun getUserByUsername(name: String): PacktUser? {
+        val name = userRepository.findOneByUsername(name)
+        return name.orElse(null)
+    }
 
 }

@@ -28,6 +28,7 @@ fun main(args: Array<String>){
             bean { ApiRoutes(ref()) }
             bean<ExceptionHandler>()
             securityBeans { securityService ->
+                println("permitting routes")
                 pathMatchers(HttpMethod.GET, "/api/projects/**").permitAll()
                     .pathMatchers("/resources/**").permitAll()
                     .pathMatchers(HttpMethod.GET, "/login").permitAll()

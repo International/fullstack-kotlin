@@ -45,14 +45,18 @@ dependencies {
     val postgresVersion: String = properties["postgresVersion"] as String
     val hibernateValidatorVersion = properties["hibernateValidatorVersion"] as String
     val kotlinxHtmlVersion: String = properties["kotlinxHtmlVersion"] as String
+    val kotlinJacksonVersion = properties["kotlinJacksonVersion"] as String
 
     compile("org.springframework.boot:spring-boot-starter")
+
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-webflux")
     compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.security:spring-security-core")
     compile("org.springframework.security:spring-security-config")
     compile("org.springframework.security:spring-security-webflux")
+
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:$kotlinJacksonVersion")
 
     compile("org.postgresql:postgresql:$postgresVersion")
 
