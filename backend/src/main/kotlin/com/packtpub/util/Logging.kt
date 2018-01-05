@@ -1,29 +1,29 @@
 package com.packtpub.util
 
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
-//import org.slf4j.Logger
+//import org.apache.logging.log4j.LogManager
+//import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import kotlin.reflect.KClass
-import kotlin.reflect.full.companionObject
 
 // Return logger for Java class, if companion object fix the name
 fun <T : Any> logger(forClass: Class<T>): Logger {
-    return LogManager.getLogger(unwrapCompanionClass(forClass).name)
+    return LoggerFactory.getLogger(forClass.name)
 }
 
 // unwrap companion class to enclosing class given a Java Class
-fun <T : Any> unwrapCompanionClass(ofClass: Class<T>): Class<*> {
-    return if (ofClass.enclosingClass != null && ofClass.enclosingClass.kotlin.companionObject?.java == ofClass) {
-        ofClass.enclosingClass
-    } else {
-        ofClass
-    }
-}
+//fun <T : Any> unwrapCompanionClass(ofClass: Class<T>): Class<*> {
+//    return if (ofClass.enclosingClass != null && ofClass.enclosingClass.kotlin.companionObject?.java == ofClass) {
+//        ofClass.enclosingClass
+//    } else {
+//        ofClass
+//    }
+//}
 
-// unwrap companion class to enclosing class given a Kotlin Class
-fun <T : Any> unwrapCompanionClass(ofClass: KClass<T>): KClass<*> {
-    return unwrapCompanionClass(ofClass.java).kotlin
-}
+//// unwrap companion class to enclosing class given a Kotlin Class
+//fun <T : Any> unwrapCompanionClass(ofClass: KClass<T>): KClass<*> {
+//    return unwrapCompanionClass(ofClass.java).kotlin
+//}
 
 // Return logger for Kotlin class
 fun <T : Any> logger(forClass: KClass<T>): Logger {

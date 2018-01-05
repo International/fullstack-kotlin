@@ -11,7 +11,7 @@ interface ProjectService {
 
 internal class ProjectServiceImpl(private val projectRepository: ProjectRepository) : ProjectService {
     override fun fetchProjects(): List<Project> = projectRepository.findAll().toList()
-    override fun saveProject(project: Project):Project = when(project.id) {
+    override fun saveProject(project: Project): Project = when(project.id) {
         null -> projectRepository.save(project)
         else -> projectRepository.findById(project.id)
             .map { persistedProject ->

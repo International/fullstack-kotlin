@@ -20,7 +20,7 @@ class ApiRoutes(private val apiHandler: ApiHandler) : WithLogging() {
                 }
             }
         }.filter{ req, next ->
-            LOG.debug(req)
+            //LOG.debug(req)
             next.handle(req)
         }
 

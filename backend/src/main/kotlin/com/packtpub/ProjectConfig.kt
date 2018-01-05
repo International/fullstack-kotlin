@@ -11,5 +11,5 @@ class ProjectConfig(private val ctx: GenericApplicationContext){
 
     @Primary
     @Bean
-    fun helloSayer():ProjectService = ProjectServiceImpl(ctx.getBean(ProjectRepository::class.java))
+    fun projectService(): ProjectService = ProjectServiceImpl(ctx.getBean(ProjectRepository::class.java))
 }

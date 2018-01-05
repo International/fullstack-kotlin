@@ -38,7 +38,7 @@ class ExceptionHandler : WebExceptionHandler {
             .syncBody(body)
 }
 
-fun ServerResponse.populateBody(exchange: ServerWebExchange): Mono<Void> = writeTo(exchange, HandlerStrategiesResponseContext(HandlerStrategies.withDefaults()))
+fun ServerResponse.populateBody(exchange: ServerWebExchange): Mono<Void> = writeTo(exchange, com.packtpub.handler.HandlerStrategiesResponseContext(HandlerStrategies.withDefaults()))
 private class HandlerStrategiesResponseContext(val strategies: HandlerStrategies) : ServerResponse.Context {
     override fun messageWriters() = strategies.messageWriters()
     override fun viewResolvers() = strategies.viewResolvers()
