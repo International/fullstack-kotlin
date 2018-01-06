@@ -16,11 +16,14 @@ data class ProjectDTO(
     val owner:String,
     val language: Language,
 
-    val id:Long? = null
+    val id:Long? = null,
+    val extraInfo:GithubApiDTO?
+
 ): Validatable()
 
 fun ProjectDTO.toProject() = Project(name, url, owner, language, id)
-fun Project.toProjectDTO() = ProjectDTO(name, url, owner, language, id)
+fun Project.toProjectDTO() =
+    ProjectDTO(name, url, owner, language, id, extraInfo = GithubApiDTO(description,license,tags))
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 open class Validatable(
