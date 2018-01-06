@@ -27,3 +27,12 @@ dependencies {
 }
 
 val compileKotlin2Js : Kotlin2JsCompile by tasks
+
+compileKotlin2Js.kotlinOptions {
+    sourceMap = true
+    metaInfo = true
+    freeCompilerArgs = listOf("-Xcoroutines=enable")
+    outputFile = "${project.buildDir.path}/js/index.js"
+    main = "call"
+    moduleKind = "commonjs"
+}
